@@ -1,57 +1,59 @@
 body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #fff0f5;
-  padding: 2rem;
-  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin: 0;
 }
 
 h1 {
-  color: #cc3366;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
 }
 
-#malla-container {
+.malla-container {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  gap: 1rem;
 }
 
-.semestre {
-  background-color: #ffe5ec;
-  padding: 1rem;
-  border-radius: 15px;
-  width: 250px;
-  min-height: 100px;
-  box-shadow: 2px 2px 10px #ddd;
+.semestre-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  padding: 15px;
 }
 
-.semestre h2 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+.semestre-card h2 {
+  text-align: center;
+  margin-top: 0;
   color: #444;
 }
 
 .ramo {
-  background-color: #ffc0cb; /* rosado claro */
-  color: #333;
-  padding: 8px 12px;
   margin: 6px 0;
-  border-radius: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
-.ramo.approved {
-  background-color: #dabfff; /* morado claro */
+.ramo.pendiente {
+  background-color: #fbd4e2; /* rosado claro */
+  color: #222;
+}
+
+.ramo.aprobado {
+  background-color: #d9bdf2; /* morado claro */
   text-decoration: line-through;
+  color: #444;
 }
 
-.ramo.locked {
-  background-color: #cccccc;
+.ramo.bloqueado {
+  background-color: #ddd;
+  color: #888;
   cursor: not-allowed;
-  pointer-events: none;
 }
