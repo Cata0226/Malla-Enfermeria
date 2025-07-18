@@ -1,6 +1,6 @@
 const cursos = [
   {
-    nivel: "100",
+    nivel: "Nivel 100",
     ramos: [
       { nombre: "Química", abre: ["Bioquímica"] },
       { nombre: "Morfo función I", abre: ["Morfo función II"] },
@@ -11,7 +11,7 @@ const cursos = [
     ],
   },
   {
-    nivel: "200",
+    nivel: "Nivel 200",
     ramos: [
       { nombre: "Bioquímica", abre: ["Farmacología"] },
       { nombre: "Morfo función II" },
@@ -22,7 +22,7 @@ const cursos = [
     ],
   },
   {
-    nivel: "300",
+    nivel: "Nivel 300",
     ramos: [
       { nombre: "Ciclo vital I", abre: ["Ciclo vital II"] },
       { nombre: "Fisiología", abre: ["Fisiopatología"] },
@@ -33,7 +33,7 @@ const cursos = [
     ],
   },
   {
-    nivel: "400",
+    nivel: "Nivel 400",
     ramos: [
       { nombre: "Salud Pública y Epidemiología" },
       { nombre: "Ciclo vital II", abre: ["Cuidados de enfermería en Salud Mental", "Cuidados de enfermería en Niños/as y Adolescentes"] },
@@ -44,7 +44,7 @@ const cursos = [
     ],
   },
   {
-    nivel: "500",
+    nivel: "Nivel 500",
     ramos: [
       { nombre: "Bioética y Derecho Sanitario" },
       { nombre: "Cuidados de Enfermería en Salud Mental" },
@@ -55,7 +55,7 @@ const cursos = [
     ],
   },
   {
-    nivel: "600",
+    nivel: "Nivel 600",
     ramos: [
       { nombre: "Enfoque de Género en Salud" },
       { nombre: "Gestión del cuidado" },
@@ -66,7 +66,7 @@ const cursos = [
     ],
   },
   {
-    nivel: "700",
+    nivel: "Nivel 700",
     ramos: [
       { nombre: "Diseño Metodológico y Pensamiento Crítico" },
       { nombre: "Mejora continua del Cuidado" },
@@ -77,7 +77,7 @@ const cursos = [
     ],
   },
   {
-    nivel: "800",
+    nivel: "Nivel 800",
     ramos: [
       { nombre: "Seminario de Enfermería" },
       { nombre: "Cuidados de Enfermería en Procesos de Fin de Vida" },
@@ -88,11 +88,13 @@ const cursos = [
     ],
   },
   {
-    nivel: "900",
-    ramos: [{ nombre: "Internado I" }],
+    nivel: "Nivel 900",
+    ramos: [
+      { nombre: "Internado I" },
+    ],
   },
   {
-    nivel: "1000",
+    nivel: "Nivel 1000",
     ramos: [
       { nombre: "Internado II" },
       { nombre: "Examen de título" },
@@ -104,52 +106,44 @@ const aprobados = new Set();
 const ramosMap = new Map();
 
 function renderMalla() {
-  const container = document.getElementById("malla");
+  const container = document.getElementById("malla-container");
   container.innerHTML = "";
 
   cursos.forEach(({ nivel, ramos }) => {
-    const nivelDiv = document.createElement("div");
-    nivelDiv.classList.add("level");
+    const card = document.createElement("div");
+    card.className = "semestre";
 
-    const title = document.createElement("h2");
-    title.textContent = `Nivel ${nivel}`;
-    nivelDiv.appendChild(title);
+    const titulo = document.createElement("h2");
+    titulo.textContent = nivel;
+    card.appendChild(titulo);
 
     ramos.forEach((ramo) => {
       const div = document.createElement("div");
-      div.classList.add("course");
+      div.className = "ramo";
       div.textContent = ramo.nombre;
 
-      // Guardar referencia para control de dependencias
       ramosMap.set(ramo.nombre, { ...ramo, element: div });
-
-      // Bloqueado si depende de algún curso no aprobado
-      if (ramo.requiere && !aprobados.has(ramo.requiere)) {
-        div.classList.add("locked");
-      }
 
       div.onclick = () => {
         if (div.classList.contains("locked")) return;
-
         const aprobado = div.classList.toggle("approved");
         aprobado ? aprobados.add(ramo.nombre) : aprobados.delete(ramo.nombre);
-        renderMalla(); // Volver a renderizar dependencias
+        renderMalla(); // Recalcular bloqueos
       };
 
-      nivelDiv.appendChild(div);
+      card.appendChild(div);
     });
 
-    container.appendChild(nivelDiv);
+    container.appendChild(card);
   });
 
-  // Aplicar bloqueo según prerrequisitos
   cursos.forEach(({ ramos }) => {
     ramos.forEach((ramo) => {
       if (ramo.abre) {
-        ramo.abre.forEach((nombreDependiente) => {
-          const dependiente = ramosMap.get(nombreDependiente);
-          if (dependiente && !aprobados.has(ramo.nombre)) {
-            dependiente.element.classList.add("locked");
+        ramo.abre.forEach((nombreDep) => {
+          const dep = ramosMap.get(nombreDep);
+          if (dep && !aprobados.has(ramo.nombre)) {
+            dep.element.classList.add("locked");
           }
         });
       }
