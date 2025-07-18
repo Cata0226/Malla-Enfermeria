@@ -1,153 +1,110 @@
-const cursos = [
-  {
-    nivel: "Nivel 100",
-    ramos: [
-      { nombre: "Química", abre: ["Bioquímica"] },
-      { nombre: "Morfo función I", abre: ["Morfo función II"] },
-      { nombre: "Biología", abre: ["Fisiología"] },
-      { nombre: "Socio antropología en Salud" },
-      { nombre: "Educación para la Salud y Primeros Auxilios" },
-      { nombre: "CFG" },
-    ],
-  },
-  {
-    nivel: "Nivel 200",
-    ramos: [
-      { nombre: "Bioquímica", abre: ["Farmacología"] },
-      { nombre: "Morfo función II" },
-      { nombre: "Bioestadística" },
-      { nombre: "Psicología general", abre: ["Psicología Evolutiva"] },
-      { nombre: "Introducción a la ciencia de la Enfermería", abre: ["Seguridad del cuidado"] },
-      { nombre: "CFG" },
-    ],
-  },
-  {
-    nivel: "Nivel 300",
-    ramos: [
-      { nombre: "Ciclo vital I", abre: ["Ciclo vital II"] },
-      { nombre: "Fisiología", abre: ["Fisiopatología"] },
-      { nombre: "Microbiología" },
-      { nombre: "Psicología Evolutiva" },
-      { nombre: "Seguridad del cuidado" },
-      { nombre: "CFG" },
-    ],
-  },
-  {
-    nivel: "Nivel 400",
-    ramos: [
-      { nombre: "Salud Pública y Epidemiología" },
-      { nombre: "Ciclo vital II", abre: ["Cuidados de enfermería en Salud Mental", "Cuidados de enfermería en Niños/as y Adolescentes"] },
-      { nombre: "Farmacología" },
-      { nombre: "Fisiopatología", abre: ["Cuidados de Enfermería en Adulto I"] },
-      { nombre: "Cuidados de Enfermería en Personas Mayores I", abre: ["Cuidados de Enfermería en Personas Mayores II"] },
-      { nombre: "CFG" },
-    ],
-  },
-  {
-    nivel: "Nivel 500",
-    ramos: [
-      { nombre: "Bioética y Derecho Sanitario" },
-      { nombre: "Cuidados de Enfermería en Salud Mental" },
-      { nombre: "Cuidados de Enfermería en Niños/as y Adolescentes I", abre: ["Cuidados de Enfermería en Niños/as y Adolescentes II"] },
-      { nombre: "Enfermería en Comunidad I", abre: ["Enfermería en Comunidad II"] },
-      { nombre: "Cuidado de Enfermería en Personas Mayores II" },
-      { nombre: "CFG" },
-    ],
-  },
-  {
-    nivel: "Nivel 600",
-    ramos: [
-      { nombre: "Enfoque de Género en Salud" },
-      { nombre: "Gestión del cuidado" },
-      { nombre: "Cuidados de Enfermería en Niños/as y Adolescentes II", abre: ["Cuidados de Enfermería en Niños/as con Necesidades Especiales"] },
-      { nombre: "Enfermería en Comunidad II" },
-      { nombre: "Cuidados de Enfermería en Adulto I", abre: ["Cuidados de Enfermería en Situaciones de Urgencia I", "Cuidados de Enfermería en Adulto II"] },
-      { nombre: "CFG" },
-    ],
-  },
-  {
-    nivel: "Nivel 700",
-    ramos: [
-      { nombre: "Diseño Metodológico y Pensamiento Crítico" },
-      { nombre: "Mejora continua del Cuidado" },
-      { nombre: "Cuidados de Enfermería en Niños/as con Necesidades Especiales" },
-      { nombre: "Cuidados de Enfermería en Situaciones de Urgencia I", abre: ["Cuidados de Enfermería en Situaciones de Urgencia II"] },
-      { nombre: "Cuidados de Enfermería en Adulto II" },
-      { nombre: "Optativo" },
-    ],
-  },
-  {
-    nivel: "Nivel 800",
-    ramos: [
-      { nombre: "Seminario de Enfermería" },
-      { nombre: "Cuidados de Enfermería en Procesos de Fin de Vida" },
-      { nombre: "Cuidados de Enfermería en Personas con Cáncer" },
-      { nombre: "Cuidados de Enfermería en Situaciones de Urgencia II" },
-      { nombre: "Cuidados Familiar y Enfermería Domiciliaria" },
-      { nombre: "Optativo" },
-    ],
-  },
-  {
-    nivel: "Nivel 900",
-    ramos: [
-      { nombre: "Internado I" },
-    ],
-  },
-  {
-    nivel: "Nivel 1000",
-    ramos: [
-      { nombre: "Internado II" },
-      { nombre: "Examen de título" },
-    ],
-  },
+const ramos = [
+  { nombre: "Química", nivel: 100 },
+  { nombre: "Morfo función I", nivel: 100 },
+  { nombre: "Biología", nivel: 100 },
+  { nombre: "Socio antropología en Salud", nivel: 100 },
+  { nombre: "Educación para la Salud y Primeros Auxilios", nivel: 100 },
+  { nombre: "CFG (100)", nivel: 100 },
+
+  { nombre: "Bioquímica", nivel: 200, prereq: ["Química"] },
+  { nombre: "Morfo función II", nivel: 200, prereq: ["Morfo función I"] },
+  { nombre: "Bioestadística", nivel: 200 },
+  { nombre: "Psicología general", nivel: 200 },
+  { nombre: "Introducción a la ciencia de la Enfermería", nivel: 200 },
+  { nombre: "CFG (200)", nivel: 200 },
+
+  { nombre: "Ciclo vital I", nivel: 300 },
+  { nombre: "Fisiología", nivel: 300, prereq: ["Biología"] },
+  { nombre: "Microbiología", nivel: 300 },
+  { nombre: "Psicología Evolutiva", nivel: 300, prereq: ["Psicología general"] },
+  { nombre: "Seguridad del cuidado", nivel: 300, prereq: ["Introducción a la ciencia de la Enfermería"] },
+  { nombre: "CFG (300)", nivel: 300 },
+
+  { nombre: "Salud Pública y Epidemiología", nivel: 400 },
+  { nombre: "Ciclo Vital II", nivel: 400, prereq: ["Ciclo vital I"] },
+  { nombre: "Farmacología", nivel: 400, prereq: ["Bioquímica"] },
+  { nombre: "Fisiopatología", nivel: 400, prereq: ["Fisiología"] },
+  { nombre: "Cuidados de Enfermería en Personas Mayores I", nivel: 400 },
+  { nombre: "CFG (400)", nivel: 400 },
+
+  { nombre: "Bioética y Derecho Sanitario", nivel: 500 },
+  { nombre: "Cuidados de Enfermería en Salud Mental", nivel: 500, prereq: ["Ciclo Vital II"] },
+  { nombre: "Cuidados de Enfermería en Niños/as y Adolescentes I", nivel: 500, prereq: ["Ciclo Vital II"] },
+  { nombre: "Enfermería en Comunidad I", nivel: 500 },
+  { nombre: "Cuidado de Enfermería en Personas Mayores II", nivel: 500, prereq: ["Cuidados de Enfermería en Personas Mayores I"] },
+  { nombre: "CFG (500)", nivel: 500 },
+
+  { nombre: "Enfoque de Género en Salud", nivel: 600 },
+  { nombre: "Gestión del cuidado", nivel: 600 },
+  { nombre: "Cuidados de Enfermería en Niños/as y Adolescentes II", nivel: 600, prereq: ["Cuidados de Enfermería en Niños/as y Adolescentes I"] },
+  { nombre: "Enfermería en Comunidad II", nivel: 600, prereq: ["Enfermería en Comunidad I"] },
+  { nombre: "Cuidados de Enfermería en Adulto I", nivel: 600, prereq: ["Fisiopatología"] },
+  { nombre: "CFG (600)", nivel: 600 },
+
+  { nombre: "Diseño Metodológico y Pensamiento Crítico", nivel: 700 },
+  { nombre: "Mejora continua del Cuidado", nivel: 700 },
+  { nombre: "Cuidados de Enfermería en Niños/as con Necesidades Especiales", nivel: 700, prereq: ["Cuidados de Enfermería en Niños/as con Necesidades Especiales"] },
+  { nombre: "Cuidados de Enfermería en Situaciones de Urgencia I", nivel: 700, prereq: ["Cuidados de Enfermería en Adulto I"] },
+  { nombre: "Cuidados de Enfermería en Adulto II", nivel: 700, prereq: ["Cuidados de Enfermería en Adulto I"] },
+  { nombre: "Optativo (700)", nivel: 700 },
+
+  { nombre: "Seminario de Enfermería", nivel: 800, prereq: ["Diseño Metodológico y Pensamiento Crítico"] },
+  { nombre: "Cuidados de Enfermería en Procesos de Fin de Vida", nivel: 800 },
+  { nombre: "Cuidados de Enfermería en Personas con Cáncer", nivel: 800 },
+  { nombre: "Cuidados de Enfermería en Situaciones de Urgencia II", nivel: 800, prereq: ["Cuidados de Enfermería en Situaciones de Urgencia I"] },
+  { nombre: "Cuidados Familiar y Enfermería Domiciliaria", nivel: 800, prereq: ["Enfermería en Comunidad II"] },
+  { nombre: "Optativo (800)", nivel: 800 },
+
+  { nombre: "Internado I", nivel: 900 },
+  { nombre: "Internado II", nivel: 1000 },
+  { nombre: "Examen de título", nivel: 1000 }
 ];
 
-const aprobados = new Set();
-const ramosMap = new Map();
+const estado = {};
 
 function renderMalla() {
-  const container = document.getElementById("malla-container");
+  const container = document.getElementById("malla");
   container.innerHTML = "";
 
-  cursos.forEach(({ nivel, ramos }) => {
+  const niveles = [...new Set(ramos.map(r => r.nivel))].sort((a, b) => a - b);
+
+  niveles.forEach(nivel => {
     const card = document.createElement("div");
-    card.className = "semestre";
+    card.className = "semestre-card";
 
     const titulo = document.createElement("h2");
-    titulo.textContent = nivel;
+    titulo.textContent = `Nivel ${nivel}`;
     card.appendChild(titulo);
 
-    ramos.forEach((ramo) => {
-      const div = document.createElement("div");
-      div.className = "ramo";
-      div.textContent = ramo.nombre;
+    ramos
+      .filter(r => r.nivel === nivel)
+      .forEach(ramo => {
+        const div = document.createElement("div");
+        div.className = "ramo";
+        div.textContent = ramo.nombre;
 
-      ramosMap.set(ramo.nombre, { ...ramo, element: div });
+        const aprobado = estado[ramo.nombre];
+        const requisitosCumplidos = !ramo.prereq || ramo.prereq.every(p => estado[p]);
 
-      div.onclick = () => {
-        if (div.classList.contains("locked")) return;
-        const aprobado = div.classList.toggle("approved");
-        aprobado ? aprobados.add(ramo.nombre) : aprobados.delete(ramo.nombre);
-        renderMalla(); // Recalcular bloqueos
-      };
+        if (aprobado) {
+          div.classList.add("aprobado");
+        } else if (!requisitosCumplidos) {
+          div.classList.add("bloqueado");
+        } else {
+          div.classList.add("pendiente");
+        }
 
-      card.appendChild(div);
-    });
+        if (requisitosCumplidos) {
+          div.addEventListener("click", () => {
+            estado[ramo.nombre] = !estado[ramo.nombre];
+            renderMalla();
+          });
+        }
+
+        card.appendChild(div);
+      });
 
     container.appendChild(card);
-  });
-
-  cursos.forEach(({ ramos }) => {
-    ramos.forEach((ramo) => {
-      if (ramo.abre) {
-        ramo.abre.forEach((nombreDep) => {
-          const dep = ramosMap.get(nombreDep);
-          if (dep && !aprobados.has(ramo.nombre)) {
-            dep.element.classList.add("locked");
-          }
-        });
-      }
-    });
   });
 }
 
