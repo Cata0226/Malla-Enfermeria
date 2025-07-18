@@ -1,32 +1,44 @@
 body {
-    font-family: sans-serif;
-    background: #fff0f5;
-    color: #333;
-    padding: 20px;
+  font-family: sans-serif;
+  background-color: #fefefe;
+  padding: 2rem;
 }
 
-.semestre {
-    margin-bottom: 20px;
+h1 {
+  color: #333;
+  margin-bottom: 2rem;
 }
 
-.ramo {
-    background-color: #ffe4e1;
-    padding: 10px;
-    margin: 5px 0;
-    cursor: pointer;
-    border-radius: 4px;
-    user-select: none;
-    transition: 0.2s;
+h2 {
+  margin-top: 2rem;
+  color: #444;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.3rem;
 }
 
-.ramo.aprobado {
-    background-color: #e6ccff;
-    text-decoration: line-through;
+.level {
+  margin-bottom: 2rem;
 }
 
-.ramo.bloqueado {
-    background-color: #ccc;
-    color: #888;
-    pointer-events: none;
+.course {
+  display: inline-block;
+  margin: 6px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: #ffd6e0; /* rosado claro */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  border: 1px solid #ccc;
 }
 
+.course.approved {
+  background-color: #e6d6ff; /* morado claro */
+  text-decoration: line-through;
+}
+
+.course.locked {
+  background-color: #d0d0d0;
+  cursor: not-allowed;
+  pointer-events: none;
+}
