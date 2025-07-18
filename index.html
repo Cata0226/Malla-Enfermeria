@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Malla Interactiva Obstetricia UChile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Malla Obstetricia y Puericultura UChile</h1>
+
+    <div class="semestre" id="semestre3">
+        <h2>3° Semestre</h2>
+        <div class="ramo" data-id="neonatologia1">Neonatología I</div>
+        <div class="ramo" data-id="obstetricia1">Obstetricia Fisiológica I</div>
+    </div>
+
+    <div class="semestre" id="semestre4">
+        <h2>4° Semestre</h2>
+        <div class="ramo bloqueado" data-id="neonatologia2" data-prerreq="neonatologia1">Neonatología II</div>
+        <div class="ramo bloqueado" data-id="obstetricia2" data-prerreq="obstetricia1">Obstetricia Fisiológica II</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
