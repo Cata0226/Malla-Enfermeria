@@ -1,1 +1,32 @@
+body {
+    font-family: sans-serif;
+    background: #fff0f5;
+    color: #333;
+    padding: 20px;
+}
+
+.semestre {
+    margin-bottom: 20px;
+}
+
+.ramo {
+    background-color: #ffe4e1;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 4px;
+    user-select: none;
+    transition: 0.2s;
+}
+
+.ramo.aprobado {
+    background-color: #e6ccff;
+    text-decoration: line-through;
+}
+
+.ramo.bloqueado {
+    background-color: #ccc;
+    color: #888;
+    pointer-events: none;
+}
 
